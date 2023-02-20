@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.example.campfinalproject.core.api.DummyServer
-import com.example.campfinalproject.core.authintactionstor.data.repository.AuthintactionStor
-import com.example.campfinalproject.core.authintactionstor.data.repository.AuthintactionStorImpl
+import com.example.campfinalproject.core.authintactionstor.AuthintactionStor
+import com.example.campfinalproject.core.authintactionstor.AuthintactionStorImpl
 import com.example.campfinalproject.core.constins.Constins
 import com.example.campfinalproject.pages.homepage.data.repository.ProductRepository
 import com.example.campfinalproject.pages.homepage.data.repository.ProductRepositoryImp
+import com.example.campfinalproject.pages.loginpage.data.repository.LoginRepository
+import com.example.campfinalproject.pages.loginpage.data.repository.LoginRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,13 +37,18 @@ object AppModule {
     }
     @Singleton
     @Provides
-    fun providesAuthintactionStor(sharedPreferences: SharedPreferences):AuthintactionStor{
+    fun providesAuthintactionStor(sharedPreferences: SharedPreferences): AuthintactionStor {
         return AuthintactionStorImpl(sharedPreferences)
     }
     @Singleton
     @Provides
-    fun providesRepository(dummyServer: DummyServer):ProductRepository{
-        return ProductRepositoryImp(dummyServer)
+    fun providesRepository(dummyServer: DummyServer,authintactionStor: AuthintactionStor):ProductRepository{
+        return ProductRepositoryImp(dummyServer,authintactionStor)
+    }
+    @Singleton
+    @Provides
+    fun providesLoginRepository(dummyServer: DummyServer,authintactionStor: AuthintactionStor):LoginRepository{
+        return LoginRepositoryImp(authintactionStor,dummyServer)
     }
 
 }

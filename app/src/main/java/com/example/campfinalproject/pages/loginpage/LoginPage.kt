@@ -1,9 +1,11 @@
 package com.example.campfinalproject.pages.loginpage
 
 import android.util.Log
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
+import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -38,15 +40,21 @@ fun LoginPage(navHostController: NavController,vmLogin:LoginViewModel= hiltViewM
             }
         }
 
-
     }
     Scaffold(modifier = Modifier.fillMaxSize()) {
         it.calculateTopPadding()
-       LoginForm(onusernamechang = {}, onPassowrdchang = {},txtUserName,txtPassowrd,vmLogin)
-        Button(onClick = {
-            vmLogin.login()
-        }) {
+       Column(modifier = Modifier.fillMaxSize()) {
+           TextField(value = txtUserName, onValueChange ={
+               txtUserName=it
+           })
+           TextField(value = txtPassowrd, onValueChange = {
+               txtPassowrd=it
+           })
+           Button(onClick = {
+               vmLogin.login(txtUserName,txtPassowrd)
+           }) {
 
-        }
+           }
+       }
     }
 }

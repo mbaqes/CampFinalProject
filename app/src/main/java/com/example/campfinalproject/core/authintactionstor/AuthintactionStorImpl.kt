@@ -1,7 +1,7 @@
-package com.example.campfinalproject.core.authintactionstor.data.repository
+package com.example.campfinalproject.core.authintactionstor
 
 import android.content.SharedPreferences
-import com.example.campfinalproject.core.authintactionstor.data.model.User
+import com.example.campfinalproject.core.authintactionstor.model.User
 import com.example.campfinalproject.core.extinion.fromJson
 import com.example.campfinalproject.core.extinion.toJson
 import javax.inject.Inject
